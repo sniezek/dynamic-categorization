@@ -28,6 +28,10 @@ articles = [
     description: 'Mądrości',
     tags: ['compression therapy']
   ),
+  OpenStruct.new(
+    title: 'Czy języki obiektowe są lepsze?',
+    tags: ['Erlang', 'Java']
+  ),
 ]
 
 def profile_info(user)
@@ -62,15 +66,21 @@ end
 
 def send(hash)
   JSONClient.new.post(HOST, body: hash)
-  puts hash.to_json
+  hash
 end
 
-[
+puts [
   profile_info(arek),
   profile_info(basia),
-  like(arek, articles.first),
+  like(arek, articles[0]),
   profile_info(ewa),
   profile_info(daniel),
   profile_info(felicja),
-  like(felicja, articles.last),
-].each { |hash| send(hash) }
+  profile_info(grzegorz),
+  profile_info(helena),
+  like(ewa, articles[2]),
+  profile_info(igor),
+  profile_info(jennifer),
+  like(felicja, articles[1]),
+  like(helena, articles[2]),
+].map { |hash| send(hash) }.to_json
