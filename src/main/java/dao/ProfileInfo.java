@@ -1,6 +1,5 @@
 package dao;
 
-
 public class ProfileInfo {
 
     private String userId;
@@ -12,19 +11,7 @@ public class ProfileInfo {
     private String university;
     private String tags;
 
-    public ProfileInfo(String userId) {
-        this.userId = userId;
-    }
-
-    public ProfileInfo(String userId, String firstName, String lastName, String gender, String city, String job, String university, String tags) {
-        this.userId = userId;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.gender = gender;
-        this.city = city;
-        this.job = job;
-        this.university = university;
-        this.tags = tags;
+    public ProfileInfo() {
     }
 
     public String getUserId() {

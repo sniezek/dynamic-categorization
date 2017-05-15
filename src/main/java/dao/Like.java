@@ -7,9 +7,7 @@ public class Like {
     private String description;
     private String[] hashTags;
 
-    public Like(String userId, String title) {
-        this.userId = userId;
-        this.title = title;
+    public Like() {
     }
 
     public String getUserId() {

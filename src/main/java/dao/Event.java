@@ -6,10 +6,7 @@ public class Event {
     private String timestamp;
     private Object payload;
 
-    public Event(Type type, String timestamp, Object payload) {
-        this.type = type;
-        this.timestamp = timestamp;
-        this.payload = payload;
+    public Event() {
     }
 
     public Type getType() {
