@@ -28,9 +28,14 @@ articles = [
     description: 'Mądrości',
     tags: ['compression therapy']
   ),
+  OpenStruct.new(
+    title: 'Czy języki obiektowe są lepsze?',
+    tags: ['Erlang', 'Java']
+  ),
 ]
 
-def profile_info(user)
+def profile_info(user, attributes_to_merge = {})
+  user = OpenStruct.new(user.to_h.merge(attributes_to_merge))
   {
     type: 'PROFILE_INFO',
     timestamp: Time.now.to_s,
@@ -62,15 +67,25 @@ end
 
 def send(hash)
   JSONClient.new.post(HOST, body: hash)
-  puts hash.to_json
+  hash
 end
 
-[
+puts [
   profile_info(arek),
   profile_info(basia),
-  like(arek, articles.first),
+  like(arek, articles[0]),
+  like(arek, articles[1]),
   profile_info(ewa),
   profile_info(daniel),
   profile_info(felicja),
-  like(felicja, articles.last),
-].each { |hash| send(hash) }
+  like(felicja, articles[1]),
+  profile_info(grzegorz),
+  profile_info(helena),
+  like(helena, articles[2]),
+  profile_info(igor),
+  like(igor, articles[2]),
+  profile_info(jennifer),
+  like(jennifer, articles[2]),
+  profile_info(helena, job: 'computer interfaces designer', tags: helena.tags + ['java'])
+  profile_info(daniel, city: 'Cracow')
+].map { |hash| send(hash) }.to_json
