@@ -8,7 +8,7 @@ class ActivityValidator {
     private static final Logger LOGGER = LoggerFactory.getLogger(ActivityValidator.class);
 
     static boolean isValid(Activity activity) {
-        if (activity.getDate() == null || activity.getUserId() == null && activity.getPayload() == null) {
+        if (activity.getDate() == null || activity.getUserId() == null || activity.getPayload() == null) {
             LOGGER.error("Received invalid Activity");
             return false;
         }
