@@ -1,12 +1,14 @@
 require 'jsonclient'
 require 'ostruct'
+require 'kafka'
 require 'json'
 require 'csv'
 
 HOST = 'http://posttestserver.com/post.php?dir=sn' # 'http://localhost:8080'
 USERS_CSV = 'users.csv'
+KAFKA_CLIENT = Kafka.new(seed_brokers: ['localhost:9092'])
 
-users_rows = CSV.read(USERS_CSV)
+users_rows = CSV.read(USERS_CSV, encoding: 'utf-8')
 users_attributes = users_rows.shift
 
 users_rows.each.with_index do |row, id|
@@ -37,10 +39,10 @@ articles = [
 def profile_info(user, attributes_to_merge = {})
   user = OpenStruct.new(user.to_h.merge(attributes_to_merge))
   {
-    type: 'PROFILE_INFO',
-    timestamp: Time.now.to_s,
+    userId: user.id.to_s,
+    date: Time.now.strftime('%Y-%m-%dT%H:%M:%S.%3NZ'),
     payload: {
-      userId: user.id.to_s,
+      type: 'PROFILE_INFO',
       firstName: user.first_name,
       lastName: user.last_name,
       gender: user.gender,
@@ -54,10 +56,11 @@ end
 
 def like(user, article)
   {
-    type: 'LIKE',
-    timestamp: Time.now.to_s,
+    
+    userId: user.id.to_s,
+    date: Time.now.strftime('%Y-%m-%dT%H:%M:%S.%3NZ'),
     payload: {
-      userId: user.id.to_s,
+      type: 'LIKE',
       title: article.title,
       description: article.description,
       hashTags: article.tags
@@ -66,7 +69,8 @@ def like(user, article)
 end
 
 def send(hash)
-  JSONClient.new.post(HOST, body: hash)
+  KAFKA_CLIENT.deliver_message(hash.to_json, topic: 'fb')
+  # JSONClient.new.post(HOST, body: hash)
   hash
 end
 
@@ -86,6 +90,6 @@ puts [
   like(igor, articles[2]),
   profile_info(jennifer),
   like(jennifer, articles[2]),
-  profile_info(helena, job: 'computer interfaces designer', tags: helena.tags + ['java'])
+  profile_info(helena, job: 'computer interfaces designer', tags: helena.tags + ['java']),
   profile_info(daniel, city: 'Cracow')
 ].map { |hash| send(hash) }.to_json

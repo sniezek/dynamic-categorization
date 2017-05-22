@@ -2,12 +2,14 @@ GEM
   remote: https://rubygems.org/
   specs:
     httpclient (2.8.3)
+    ruby-kafka (0.3.17)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   httpclient
+  ruby-kafka
 
 BUNDLED WITH
    1.14.6
