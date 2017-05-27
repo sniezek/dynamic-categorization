@@ -1,5 +1,6 @@
 package dc.group.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -17,6 +18,7 @@ import java.util.stream.Stream;
 public class Group {
     @Id
     private GroupKey key;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date creationDate;
     private String name;
     @DBRef
