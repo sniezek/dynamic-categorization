@@ -1,0 +1,19 @@
+{
+    "identifier": "it_women",
+    "name": "IT Women",
+    "allRequired": [
+        {
+            "reCheck": "true",
+            "anyOf": [
+                {"equal": {"type": ["PROFILE_INFO"], "gender": ["female"]}, "contain": {}}
+            ]
+        },
+        {
+            "reCheck": "true",
+            "anyOf": [
+                {"equal": {"type": ["PROFILE_INFO"]}, "contain": {"job": ["computer", "programmer", "software"]}}
+            ]
+        }
+    ],
+    "atLeastOneRequired": []
+}

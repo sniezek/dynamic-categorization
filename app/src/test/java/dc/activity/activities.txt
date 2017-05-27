@@ -1,0 +1,17 @@
+{"userId":"0","date":"2017-05-22T20:40:33.571Z","payload":{"type":"PROFILE_INFO","firstName":"Arek","lastName":"Ącki","gender":"male","city":"Cracow","job":"programmer","university":"AGH","tags":["C++"]}}
+{"userId":"1","date":"2017-05-22T20:40:33.571Z","payload":{"type":"PROFILE_INFO","firstName":"Basia","lastName":"Babacka","gender":"female","city":"Krakow","job":"programmer","university":"AGH","tags":["C++"]}}
+{"userId":"0","date":"2017-05-22T20:40:33.571Z","payload":{"type":"LIKE","title":"JVM wygrywa!","description":"Mądry artykuł","hashTags":["java", "scala"]}}
+{"userId":"0","date":"2017-05-22T20:40:33.571Z","payload":{"type":"LIKE","title":"Kompresjoterapia jako pomoc w leczeniu zylakow","description":"Madrosci","hashTags":["compressiontherapy"]}}
+{"userId":"3","date":"2017-05-22T20:40:33.571Z","payload":{"type":"PROFILE_INFO","firstName":"Ewa","lastName":"Elska","gender":"female","city":"Warsaw","job":"computer engineer","university":"SGH","tags":["Java"]}}
+{"userId":"2","date":"2017-05-22T20:40:33.571Z","payload":{"type":"PROFILE_INFO","firstName":"Daniel","lastName":"Dąbski","gender":"male","city":"Warsaw","job":"computer scientist","university":"UW","tags":["Java"]}}
+{"userId":"4","date":"2017-05-22T20:40:33.571Z","payload":{"type":"PROFILE_INFO","firstName":"Felicja","lastName":"Felisińska","gender":"female","city":"Warsaw","job":"physiotherapist","university":"AWF","tags":["compressiontherapy"]}}
+{"userId":"4","date":"2017-05-22T20:40:33.571Z","payload":{"type":"LIKE","title":"Kompresjoterapia jako pomoc w leczeniu zylakow","description":"Madrosci","hashTags":["compressiontherapy"]}}
+{"userId":"5","date":"2017-05-22T20:40:33.571Z","payload":{"type":"PROFILE_INFO","firstName":"Grzegorz","lastName":"Gawroński","gender":"male","city":"Warsaw","job":"computer expert","university":"UW","tags":["C++","Java"]}}
+{"userId":"6","date":"2017-05-22T20:40:33.571Z","payload":{"type":"PROFILE_INFO","firstName":"Helena","lastName":"Halicka","gender":"female","city":"Cracow","job":"designer","university":"ASP","tags":["pencil"]}}
+{"userId":"6","date":"2017-05-22T20:40:33.571Z","payload":{"type":"LIKE","title":"Czy języki obiektowe są lepsze?","description":"","hashTags":["Erlang","Java"]}}
+{"userId":"7","date":"2017-05-22T20:40:33.571Z","payload":{"type":"PROFILE_INFO","firstName":"Igor","lastName":"Iliłowicz","gender":"male","city":"Cracow","job":"writer","university":"UJ","tags":["fantasy"]}}
+{"userId":"7","date":"2017-05-22T20:40:33.572Z","payload":{"type":"LIKE","title":"Czy języki obiektowe są lepsze?","description":"","hashTags":["Erlang","Java"]}}
+{"userId":"8","date":"2017-05-22T20:40:33.572Z","payload":{"type":"PROFILE_INFO","firstName":"Jennifer","lastName":"Jagiełło","gender":"female","city":"Gdansk","job":"writer","university":"AGH","tags":["stories"]}}
+{"userId":"8","date":"2017-05-22T20:40:33.572Z","payload":{"type":"LIKE","title":"Czy języki obiektowe są lepsze?","description":"","hashTags":["Erlang","Java"]}}
+{"userId":"6","date":"2017-05-22T20:40:33.572Z","payload":{"type":"PROFILE_INFO","firstName":"Helena","lastName":"Halicka","gender":"female","city":"Cracow","job":"computer interfaces designer","university":"ASP","tags":["pencil","java"]}}
+{"userId":"2","date":"2017-05-22T20:40:33.572Z","payload":{"type":"PROFILE_INFO","firstName":"Daniel","lastName":"Dąbski","gender":"male","city":"Cracow","job":"computer scientist","university":"UW","tags":["Java"]}}

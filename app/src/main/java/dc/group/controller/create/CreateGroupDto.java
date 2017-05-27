@@ -1,20 +1,24 @@
-package dc.group.controller;
+package dc.group.controller.create;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 
-public class GroupDto {
+public class CreateGroupDto {
     @NotEmpty
     private String identifier;
     @NotEmpty
     private String name;
-    @NotEmpty
+    @NotNull
     @Valid
-    private Set<GroupConditionDto> conditions;
+    private Set<CreateGroupConditionDto> allRequired;
+    @NotNull
+    @Valid
+    private Set<CreateGroupConditionDto> atLeastOneRequired;
 
-    public GroupDto() {
+    public CreateGroupDto() {
     }
 
     public String getIdentifier() {
@@ -33,11 +37,11 @@ public class GroupDto {
         this.name = name;
     }
 
-    public Set<GroupConditionDto> getConditions() {
-        return conditions;
+    public Set<CreateGroupConditionDto> getAllRequired() {
+        return allRequired;
     }
 
-    public void setConditions(Set<GroupConditionDto> conditions) {
-        this.conditions = conditions;
+    public Set<CreateGroupConditionDto> getAtLeastOneRequired() {
+        return atLeastOneRequired;
     }
 }

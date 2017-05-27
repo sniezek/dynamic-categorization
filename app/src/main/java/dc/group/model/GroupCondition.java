@@ -1,32 +1,39 @@
 package dc.group.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 @Document
 public class GroupCondition {
     @Id
     private GroupConditionKey key;
-    private Set<String> userIds;
+    @JsonIgnore
+    private Map<String, Date> userIds;
 
     public GroupCondition(GroupConditionKey key) {
         this.key = key;
-        this.userIds = new HashSet<>();
+        this.userIds = new HashMap<>();
     }
 
     public GroupConditionKey getKey() {
         return key;
     }
 
-    public Set<String> getUserIds() {
+    public Map<String, Date> getUserIds() {
         return userIds;
     }
 
     public void addUserId(String userId) {
-        userIds.add(userId);
+        userIds.put(userId, new Date());
+    }
+
+    public void removeUserId(String userId) {
+        userIds.remove(userId);
     }
 
     @Override
@@ -46,5 +53,13 @@ public class GroupCondition {
     @Override
     public int hashCode() {
         return key.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "key=" + key +
+                ", userIds=" + userIds +
+                '}';
     }
 }

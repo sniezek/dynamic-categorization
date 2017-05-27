@@ -1,0 +1,29 @@
+{
+    "identifier": "java_cracow",
+    "name": "People interested in Java from Cracow",
+    "allRequired": [
+        {
+            "reCheck": "true",
+            "anyOf": [
+                {"equal": {"type": ["PROFILE_INFO"], "city": ["Cracow", "Krakow"]}, "contain": {}}
+            ]
+        }
+    ],
+    "atLeastOneRequired": [
+        {
+            "reCheck": "true",
+            "anyOf": [
+                {"equal": {"type": ["PROFILE_INFO"]}, "contain": {"job": ["Java"]}}
+            ]
+        },
+        {
+            "reCheck": "false",
+            "anyOf": [
+                {"equal": {"type": ["PROFILE_INFO"]}, "contain": {"tags": ["Java"]}},
+                {"equal": {"type": ["LIKE", "COMMENT"]}, "contain": {"title": ["Java"]}},
+                {"equal": {"type": ["LIKE", "COMMENT"]}, "contain": {"description": ["Java"]}},
+                {"equal": {"type": ["LIKE", "COMMENT"]}, "contain": {"hashTags": ["Java"]}}
+            ]
+        }
+    ]
+}

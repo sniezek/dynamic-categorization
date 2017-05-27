@@ -34,4 +34,13 @@ public class Activity {
     public void setPayload(Map<String, ?> payload) {
         this.payload = payload;
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "date=" + date +
+                ", userId='" + userId + '\'' +
+                ", payload=" + payload +
+                '}';
+    }
 }

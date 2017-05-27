@@ -1,43 +1,73 @@
 package dc.group.controller;
 
 import dc.ProviderId;
-import dc.group.model.Group;
 import dc.group.GroupService;
+import dc.group.controller.create.CreateGroupDto;
+import dc.group.controller.info.InfoGroupDto;
+import dc.group.model.Group;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Service;
 
-import javax.validation.Valid;
+import java.util.List;
+import java.util.stream.Collectors;
 
-@RestController
-public class GroupController {
+@Service
+class GroupController {
     @Autowired
     private GroupService groupService;
 
-    @PostMapping("/fb")
-    public ResponseEntity<?> createGroup(@Valid @RequestBody GroupDto group) {
-        return groupService.groupExists(ProviderId.FB, group.getIdentifier()) ? conflictResponse() : createdResponse(groupService.createGroup(ProviderId.FB, group));
+    ResponseEntity<?> createGroup(ProviderId providerId, CreateGroupDto group) {
+        return groupService.groupExists(providerId, group.getIdentifier()) ? conflictResponse() : createdResponse(groupService.createGroup(providerId, group));
     }
 
-    @GetMapping("/fb/{identifier}")
-    public ResponseEntity<?> getGroup(@PathVariable String identifier) {
-        return groupService.getGroup(ProviderId.FB, identifier).<ResponseEntity<?>>map(GroupController::okResponse).orElseGet(GroupController::notFoundResponse);
+    ResponseEntity<List<InfoGroupDto>> getGroupsInformation(ProviderId providerId) {
+        return okResponse(groupService.getGroups(providerId).stream()
+                .map(group -> new InfoGroupDto(group.getKey().getIdentifier(), group.getUserIds()))
+                .collect(Collectors.toList()));
+    }
+
+    ResponseEntity<List<Group>> getGroupsDetailedInformation(ProviderId providerId) {
+        return okResponse(groupService.getGroups(providerId));
+    }
+
+    ResponseEntity<?> getGroupInformation(ProviderId providerId, String identifier) {
+        return groupService.getGroup(providerId, identifier)
+                .map(group -> new InfoGroupDto(group.getKey().getIdentifier(), group.getUserIds()))
+                .<ResponseEntity<?>>map(GroupController::okResponse)
+                .orElseGet(GroupController::notFoundResponse);
+    }
+
+    ResponseEntity<?> getGroupDetailedInformation(ProviderId providerId, String identifier) {
+        return groupService.getGroup(providerId, identifier)
+                .<ResponseEntity<?>>map(GroupController::okResponse)
+                .orElseGet(GroupController::notFoundResponse);
+    }
+
+    ResponseEntity<?> deleteGroup(ProviderId providerId, String identifier) {
+        if (groupService.groupExists(providerId, identifier)) {
+            groupService.deleteGroup(providerId, identifier);
+
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+
+        return notFoundResponse();
     }
 
     private static ResponseEntity<String> conflictResponse() {
         return new ResponseEntity<>("A group with such name already exists!", HttpStatus.CONFLICT);
     }
 
-    private static <T> ResponseEntity<T> createdResponse(T entity) {
-        return new ResponseEntity<>(entity, HttpStatus.CREATED);
+    private static ResponseEntity<Group> createdResponse(Group group) {
+        return new ResponseEntity<>(group, HttpStatus.CREATED);
     }
 
     private static ResponseEntity<String> notFoundResponse() {
         return new ResponseEntity<>("Group not found!", HttpStatus.NOT_FOUND);
     }
 
-    private static ResponseEntity<Group> okResponse(Group entity) {
+    private static <T> ResponseEntity<T> okResponse(T entity) {
         return new ResponseEntity<>(entity, HttpStatus.OK);
     }
 }

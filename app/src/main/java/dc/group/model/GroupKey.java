@@ -1,11 +1,13 @@
 package dc.group.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import dc.ProviderId;
 
 import java.io.Serializable;
 import java.util.Objects;
 
 public class GroupKey implements Serializable {
+    @JsonIgnore
     private final ProviderId providerId;
     private final String identifier;
 
@@ -39,5 +41,13 @@ public class GroupKey implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(providerId, identifier);
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "providerId=" + providerId +
+                ", identifier='" + identifier + '\'' +
+                '}';
     }
 }

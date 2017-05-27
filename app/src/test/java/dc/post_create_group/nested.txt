@@ -1,0 +1,13 @@
+{
+    "identifier": "nested",
+    "name": "Nested conditions test",
+    "allRequired": [
+        {
+            "reCheck": "true",
+            "anyOf": [
+                {"equal": {"test": [{"eq": ["ok"]}], "test2": [{"eq": ["ok2"]}]}, "contain": {"test": [{"con": ["hey"]}], "test2": [{"con": ["hi"]}]}}
+            ]
+        }
+    ],
+    "atLeastOneRequired": []
+}

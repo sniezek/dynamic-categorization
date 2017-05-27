@@ -1,32 +1,34 @@
 package dc.group.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import dc.ProviderId;
 
 import java.io.Serializable;
-import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 
 public class GroupConditionKey implements Serializable {
+    @JsonIgnore
     private final ProviderId providerId;
-    private final Map<String, ?> equalsConditions;
-    private final Map<String, ?> containsConditions;
+    private final boolean reCheck;
+    private final Set<GroupSubcondition> anyOf;
 
-    public GroupConditionKey(ProviderId providerId, Map<String, ?> equalsConditions, Map<String, ?> containsConditions) {
+    public GroupConditionKey(ProviderId providerId, boolean reCheck, Set<GroupSubcondition> anyOf) {
         this.providerId = providerId;
-        this.equalsConditions = equalsConditions;
-        this.containsConditions = containsConditions;
+        this.reCheck = reCheck;
+        this.anyOf = anyOf;
     }
 
     public ProviderId getProviderId() {
         return providerId;
     }
 
-    public Map<String, ?> getEqualsConditions() {
-        return equalsConditions;
+    public boolean isReCheck() {
+        return reCheck;
     }
 
-    public Map<String, ?> getContainsConditions() {
-        return containsConditions;
+    public Set<GroupSubcondition> getAnyOf() {
+        return anyOf;
     }
 
     @Override
@@ -37,7 +39,7 @@ public class GroupConditionKey implements Serializable {
         if (obj instanceof GroupConditionKey) {
             GroupConditionKey key = (GroupConditionKey) obj;
 
-            return Objects.equals(providerId, key.getProviderId()) && Objects.equals(equalsConditions, key.getEqualsConditions()) && Objects.equals(containsConditions, key.getContainsConditions());
+            return Objects.equals(providerId, key.getProviderId()) && Objects.equals(reCheck, key.isReCheck()) && Objects.equals(anyOf, key.getAnyOf());
         }
 
         return false;
@@ -45,6 +47,15 @@ public class GroupConditionKey implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(providerId, equalsConditions, containsConditions);
+        return Objects.hash(providerId, reCheck, anyOf);
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "providerId=" + providerId +
+                ", reCheck=" + reCheck +
+                ", anyOf=" + anyOf +
+                '}';
     }
 }
