@@ -21,18 +21,18 @@ end
 
 articles = [
   OpenStruct.new(
-    title: 'Java wygrywa!',
-    description: 'Mądry artykuł',
-    tags: ['java']
+    title: 'JVM wygrywa!',
+    description: 'Madry artykul',
+    tags: %w[java scala]
   ),
   OpenStruct.new(
-    title: 'Kompresjoterapia jako pomoc w leczeniu żylaków',
-    description: 'Mądrości',
-    tags: ['compression therapy']
+    title: 'Kompresjoterapia jako pomoc w leczeniu zylakow',
+    description: 'Madrosci',
+    tags: ['compressiontherapy']
   ),
   OpenStruct.new(
-    title: 'Czy języki obiektowe są lepsze?',
-    tags: ['Erlang', 'Java']
+    title: 'Czy jezyki obiektowe sa lepsze?',
+    tags: %w[Erlang Java]
   ),
 ]
 

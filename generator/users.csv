@@ -1,10 +1,10 @@
 symbol,first_name,last_name,gender,city,job,university,tags
-arek,Arek,Ącki,male,Cracow,programmer,AGH,C++
-basia,Basia,Babacka,female,Cracow,programmer,AGH,C++
-daniel,Daniel,Dąbski,male,Warsaw,computer scientist,UW,Java
+arek,Arek,Acki,male,Cracow,programmer,AGH,C++
+basia,Basia,Babacka,female,Krakow,programmer,AGH,C++
+daniel,Daniel,Dabski,male,Warsaw,computer scientist,UW,Java
 ewa,Ewa,Elska,female,Warsaw,computer engineer,SGH,Java
-felicja,Felicja,Felisińska,female,Warsaw,physiotherapist,AWF,compression therapy
-grzegorz,Grzegorz,Gawroński,male,Warsaw,computer expert,UW,C++,Java
+felicja,Felicja,Felisinska,female,Warsaw,physiotherapist,AWF,compression therapy
+grzegorz,Grzegorz,Gawronski,male,Warsaw,computer expert,UW,C++,Java
 helena,Helena,Halicka,female,Cracow,designer,ASP,pencil
-igor,Igor,Iliłowicz,male,Cracow,writer,UJ,fantasy
-jennifer,Jennifer,Jagiełło,female,Gdansk,writer,AGH,stories
+igor,Igor,Ililowicz,male,Cracow,writer,UJ,fantasy
+jennifer,Jennifer,Jagiello,female,Gdansk,writer,AGH,stories
