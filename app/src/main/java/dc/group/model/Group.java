@@ -2,6 +2,7 @@ package dc.group.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import dc.ProviderId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -38,6 +39,14 @@ public class Group {
         return key;
     }
 
+    public ProviderId getProviderId() {
+        return key.getProviderId();
+    }
+
+    public String getIdentifier() {
+        return key.getIdentifier();
+    }
+
     public Date getCreationDate() {
         return creationDate;
     }
@@ -60,18 +69,20 @@ public class Group {
     }
 
     public Set<String> getUserIds() {
-        return allRequired.stream()
+        Set<String> userIdsOfAtLeastOneRequired = atLeastOneRequired.stream()
+                .flatMap(condition -> condition.getUserIds().keySet().stream())
+                .collect(Collectors.toSet());
+
+        Set<String> userIdsOfAllRequired = allRequired.stream()
                 .flatMap(condition -> condition.getUserIds().keySet().stream())
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
                 .entrySet().stream()
                 .filter(entry -> entry.getValue() == allRequired.size())
                 .map(Map.Entry::getKey)
-                .filter(userId -> {
-                    Set<String> userIdsOfAtLeastOneRequired = atLeastOneRequired.stream()
-                            .flatMap(condition -> condition.getUserIds().keySet().stream()).collect(Collectors.toSet());
+                .collect(Collectors.toSet());
 
-                    return userIdsOfAtLeastOneRequired.isEmpty() || userIdsOfAtLeastOneRequired.contains(userId);
-                })
+        return userIdsOfAtLeastOneRequired.isEmpty() ? userIdsOfAllRequired : userIdsOfAllRequired.stream()
+                .filter(userIdsOfAtLeastOneRequired::contains)
                 .collect(Collectors.toSet());
     }
 

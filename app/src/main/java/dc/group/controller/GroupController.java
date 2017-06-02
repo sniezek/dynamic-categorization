@@ -24,7 +24,7 @@ class GroupController {
 
     ResponseEntity<List<InfoGroupDto>> getGroupsInformation(ProviderId providerId) {
         return okResponse(groupService.getGroups(providerId).stream()
-                .map(group -> new InfoGroupDto(group.getKey().getIdentifier(), group.getUserIds()))
+                .map(group -> new InfoGroupDto(group.getIdentifier(), group.getUserIds()))
                 .collect(Collectors.toList()));
     }
 
@@ -34,7 +34,7 @@ class GroupController {
 
     ResponseEntity<?> getGroupInformation(ProviderId providerId, String identifier) {
         return groupService.getGroup(providerId, identifier)
-                .map(group -> new InfoGroupDto(group.getKey().getIdentifier(), group.getUserIds()))
+                .map(group -> new InfoGroupDto(group.getIdentifier(), group.getUserIds()))
                 .<ResponseEntity<?>>map(GroupController::okResponse)
                 .orElseGet(GroupController::notFoundResponse);
     }

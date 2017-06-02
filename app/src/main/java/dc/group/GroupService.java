@@ -80,18 +80,16 @@ public class GroupService {
             LOGGER.info("Checking group {} conditions", group.getKey());
 
             group.getConditions().forEach(condition -> {
-                GroupConditionKey groupConditionKey = condition.getKey();
+                LOGGER.info("Checking group condition {}", condition.getKey());
 
-                LOGGER.info("Checking group condition {}", groupConditionKey);
-
-                if (GroupConditionAnalyzer.shouldGroupConditionBeCheckedForActivity(groupConditionKey, activityPayload)) {
+                if (GroupConditionAnalyzer.shouldGroupConditionBeCheckedForActivity(condition, activityPayload)) {
                     boolean activityUserIdInGroupConditionUserIds = condition.getUserIds().keySet().contains(activityUserId);
 
-                    if (GroupConditionAnalyzer.isGroupConditionMetForActivity(groupConditionKey, activityPayload)) {
+                    if (GroupConditionAnalyzer.isGroupConditionMetForActivity(condition, activityPayload)) {
                         LOGGER.info("Group condition met");
 
                         saveUserIdForGroupCondition(activityUserIdInGroupConditionUserIds, condition, activityUserId);
-                    } else if (groupConditionKey.isReCheck() && activityUserIdInGroupConditionUserIds) {
+                    } else if (condition.isReCheck() && activityUserIdInGroupConditionUserIds) {
                         LOGGER.info("reCheck group condition not met, userId was found in the group condition and removed from it");
 
                         removeUserIdForGroupCondition(condition, activityUserId);

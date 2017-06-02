@@ -1,6 +1,6 @@
 package dc.group;
 
-import dc.group.model.GroupConditionKey;
+import dc.group.model.GroupCondition;
 import dc.group.model.GroupSubcondition;
 
 import java.util.*;
@@ -9,13 +9,13 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 class GroupConditionAnalyzer {
-    static boolean shouldGroupConditionBeCheckedForActivity(GroupConditionKey key, Map<String, ?> activityPayload) {
-        return key.getAnyOf().stream()
+    static boolean shouldGroupConditionBeCheckedForActivity(GroupCondition condition, Map<String, ?> activityPayload) {
+        return condition.getAnyOf().stream()
                 .anyMatch(subcondition -> allSubconditionFieldsInActivityPayload(subcondition, activityPayload));
     }
 
-    static boolean isGroupConditionMetForActivity(GroupConditionKey key, Map<String, ?> activityPayload) {
-        return key.getAnyOf().stream()
+    static boolean isGroupConditionMetForActivity(GroupCondition condition, Map<String, ?> activityPayload) {
+        return condition.getAnyOf().stream()
                 .anyMatch(subcondition -> areEqualFieldConditionsMet(subcondition, activityPayload) && areContainFieldConditionsMet(subcondition, activityPayload));
     }
 

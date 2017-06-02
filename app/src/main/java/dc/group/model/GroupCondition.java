@@ -1,12 +1,14 @@
 package dc.group.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import dc.ProviderId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 @Document
 public class GroupCondition {
@@ -22,6 +24,18 @@ public class GroupCondition {
 
     public GroupConditionKey getKey() {
         return key;
+    }
+
+    public ProviderId getProviderId() {
+        return key.getProviderId();
+    }
+
+    public boolean isReCheck() {
+        return key.isReCheck();
+    }
+
+    public Set<GroupSubcondition> getAnyOf() {
+        return key.getAnyOf();
     }
 
     public Map<String, Date> getUserIds() {
